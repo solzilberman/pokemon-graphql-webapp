@@ -1,26 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
+import ApolloClient from 'apollo-boost';
+import { ApolloProvider } from "@apollo/react-hooks";
+import PokemonContainer from './containers/PokemonContainer';
 import './App.css';
 
+
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const client = new ApolloClient({
+        uri: 'https://graphql-pokemon.now.sh/'
+    });
+
+    return (
+        <ApolloProvider client={client}>
+            <main>
+                <div className="mainHead">
+                    <h1 className="head">Pokemon GraphQl Database</h1>
+                </div>
+                <PokemonContainer />
+            </main>
+        </ApolloProvider>
+    );
 }
 
 export default App;
